@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#fetchWorkspaceDetails should collect data 1`] = `
+Object {
+  "collectedEntities": Array [
+    Object {
+      "_class": Array [
+        "Account",
+      ],
+      "_key": "databricks_workspace:3840207185082406.6",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "id": "3840207185082406.6",
+          },
+        },
+      ],
+      "_type": "databricks_workspace",
+      "createdOn": undefined,
+      "displayName": "3840207185082406.6",
+      "id": "3840207185082406.6",
+      "name": "3840207185082406.6",
+    },
+  ],
+  "encounteredTypes": Array [
+    "databricks_workspace",
+  ],
+  "numCollectedEntities": 1,
+}
+`;

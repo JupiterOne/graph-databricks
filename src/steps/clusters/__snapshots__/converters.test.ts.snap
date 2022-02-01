@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#createClusterEntity should convert to entity 1`] = `
+Object {
+  "_class": Array [
+    "Cluster",
+  ],
+  "_key": "databricks_cluster:0117-142331-yanks462",
+  "_rawData": Array [
+    Object {
+      "name": "default",
+      "rawData": Object {
+        "autoscale": Object {
+          "max_workers": 2,
+          "min_workers": 1,
+        },
+        "autotermination_minutes": 20,
+        "cluster_id": "0117-142331-yanks462",
+        "cluster_name": "test-gcp-cluster",
+        "cluster_source": "UI",
+        "creator_user_name": "test-user@gmail.com",
+        "default_tags": Object {
+          "ClusterId": "0117-142331-yanks462",
+          "ClusterName": "test-gcp-cluster",
+          "Creator": "test-user@gmail.com",
+          "Vendor": "Databricks",
+        },
+        "disk_spec": Object {},
+        "driver": Object {
+          "private_ip": "127.0.0.1",
+        },
+        "driver_instance_source": Object {
+          "node_type_id": "n1-standard-4",
+        },
+        "driver_node_type_id": "n1-standard-4",
+        "enable_elastic_disk": false,
+        "enable_local_disk_encryption": false,
+        "gcp_attributes": Object {
+          "availability": "ON_DEMAND_GCP",
+          "use_preemptible_executors": false,
+          "zone_id": "HA",
+        },
+        "init_scripts_safe_mode": false,
+        "instance_source": Object {
+          "node_type_id": "n1-standard-4",
+        },
+        "last_state_loss_time": 1642429429732,
+        "node_type_id": "n1-standard-4",
+        "spark_env_vars": Object {
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3",
+        },
+        "spark_version": "9.1.x-scala2.12",
+        "start_time": 1642429411156,
+        "state": "TERMINATED",
+        "state_message": "Cluster terminated by CLOUD_PROVIDER_LAUNCH_FAILURE",
+        "terminated_time": 1642429429719,
+      },
+    },
+  ],
+  "_type": "databricks_cluster",
+  "active": false,
+  "autoTerminationMinutes": 20,
+  "createdOn": 1642429411156,
+  "creator": "test-user@gmail.com",
+  "displayName": "test-gcp-cluster",
+  "enableElasticDisk": false,
+  "enableLocalDiskEncryption": false,
+  "initScriptsSafeMode": false,
+  "name": "test-gcp-cluster",
+  "nodeTypeId": "n1-standard-4",
+  "state": "TERMINATED",
+  "terminatedOn": 1642429429719,
+}
+`;

@@ -1,28 +1,39 @@
 # Development
 
-Add details here to give a brief overview of how to work with the provider APIs.
-Please reference any SDKs or API docs used to help build the integration here.
-
-## Prerequisites
-
-Supply details about software or tooling (like maybe Docker or Terraform) that
-is needed for development here.
-
-Please supply references to documentation that details how to install those
-dependencies here.
-
-Tools like Node.js and NPM are already covered in the [README](../README.md) so
-don't bother documenting that here.
+This integration focuses on [Databricks](https://databricks.com/) and is using
+[Databricks API](https://docs.databricks.com/dev-tools/api/latest/index.html)
+for interacting with the Databricks resources.
 
 ## Provider account setup
 
-Please provide information about the steps needed to create an account with a
-provider. Images and references to a provider's documentation is very helpful
-for new developers picking up your work.
+### Follow these steps to create the necessary Zoom app:
+
+1. Go to [Databricks GCP dashboard](https://accounts.gcp.databricks.com/login)
+   and log in.
+
+2. In the [Workspaces section](https://accounts.gcp.databricks.com/workspaces),
+   choose the workspace.
+
+3. You will be able to see the URL on the following page that has the following
+   format: https://[numbers].[number].gcp.databricks.com
+
+4. Take note of it and supply it to the .env file. (Example,
+   https://1122334455.6.gcp.databricks.com would result in this ENV variable:
+   DATABRICKS_SUBDOMAIN=1122334455.6)
+
+5. Next, click on that link to go to the workspace dashboard. Once there, click
+   on the settings icon (bottom part of left side menu) and choose "User
+   settings".
+
+6. Click "Generate New Token", add comment/description, and press "Generate".
+   Make sure to copy the token and supply it as the ENV variable
+   (DATABRICKS_ACCESS_TOKEN=[token you've just generated])
 
 ## Authentication
 
-Supply details here for information on how to authenticate with a provider so
-that developers have an idea of what's needed to hit APIs. It may be useful to
-provide explanations for each value specified in the
-[`IntegrationInstanceConfigFieldMap`](../src/config.ts).
+Copy the `.env.example` to `.env` file and fill in the variables using the user
+information and API token information generated from instructions above. The
+mapping is as follows:
+
+- DATABRICKS_SUBDOMAIN= ${`subdomain`}
+- DATABRICKS_ACCESS_TOKEN= ${`accessToken`}

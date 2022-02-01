@@ -1,18 +1,18 @@
 import { StepSpec } from '@jupiterone/integration-sdk-core';
 import { IntegrationConfig } from '../../../../src/config';
 
-export const accountSpec: StepSpec<IntegrationConfig>[] = [
+export const workspaceSpec: StepSpec<IntegrationConfig>[] = [
   {
     /**
      * ENDPOINT: n/a
      * PATTERN: Singleton
      */
-    id: 'fetch-account',
-    name: 'Fetch Account Details',
+    id: 'fetch-workspace',
+    name: 'Fetch Workspace Details',
     entities: [
       {
-        resourceName: 'Account',
-        _type: 'acme_account',
+        resourceName: 'Workspace',
+        _type: 'databricks_workspace',
         _class: ['Account'],
       },
     ],
