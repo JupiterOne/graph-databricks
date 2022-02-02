@@ -7,10 +7,12 @@ if (process.env.LOAD_ENV) {
     path: path.join(__dirname, '../.env'),
   });
 }
-const DEFAULT_CLIENT_ID = 'dummy-acme-client-id';
-const DEFAULT_CLIENT_SECRET = 'dummy-acme-client-secret';
+const DEFAULT_DATABRICKS_SUBDOMAIN = '3840207185082406.6';
+const DEFAULT_DATABRICKS_ACCESS_TOKEN = 'dummy-databricks-access-token';
 
 export const integrationConfig: IntegrationConfig = {
-  clientId: process.env.CLIENT_ID || DEFAULT_CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET || DEFAULT_CLIENT_SECRET,
+  databricksSubdomain:
+    process.env.DATABRICKS_SUBDOMAIN || DEFAULT_DATABRICKS_SUBDOMAIN,
+  databricksAccessToken:
+    process.env.DATABRICKS_ACCESS_TOKEN || DEFAULT_DATABRICKS_ACCESS_TOKEN,
 };

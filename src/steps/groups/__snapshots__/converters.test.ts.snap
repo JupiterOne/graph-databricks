@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#createGroupEntity should convert to entity 1`] = `
+Object {
+  "_class": Array [
+    "UserGroup",
+  ],
+  "_key": "databricks_group:test-group-b",
+  "_rawData": Array [
+    Object {
+      "name": "default",
+      "rawData": Object {
+        "name": "test-group-b",
+      },
+    },
+  ],
+  "_type": "databricks_group",
+  "createdOn": undefined,
+  "displayName": "test-group-b",
+  "name": "test-group-b",
+}
+`;
+
+exports[`#createUserEntity should convert to entity 1`] = `
+Object {
+  "_class": Array [
+    "User",
+  ],
+  "_key": "databricks_user:mock-user@gmail.com",
+  "_rawData": Array [
+    Object {
+      "name": "default",
+      "rawData": Object {
+        "username": "mock-user@gmail.com",
+      },
+    },
+  ],
+  "_type": "databricks_user",
+  "createdOn": undefined,
+  "displayName": "mock-user@gmail.com",
+  "name": "mock-user@gmail.com",
+  "username": "mock-user@gmail.com",
+}
+`;

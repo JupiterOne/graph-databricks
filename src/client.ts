@@ -1,120 +1,148 @@
-import http from 'http';
+import fetch from 'node-fetch';
 
-import { IntegrationProviderAuthenticationError } from '@jupiterone/integration-sdk-core';
+import {
+  IntegrationProviderAPIError,
+  IntegrationProviderAuthenticationError,
+} from '@jupiterone/integration-sdk-core';
 
 import { IntegrationConfig } from './config';
-import { AcmeUser, AcmeGroup } from './types';
+import {
+  GroupUsersResponse,
+  DatabricksUser,
+  GroupsResponse,
+  DatabricksCluster,
+  ClustersResponse,
+} from './types';
 
 export type ResourceIteratee<T> = (each: T) => Promise<void> | void;
 
-/**
- * An APIClient maintains authentication state and provides an interface to
- * third party data APIs.
- *
- * It is recommended that integrations wrap provider data APIs to provide a
- * place to handle error responses and implement common patterns for iterating
- * resources.
- */
 export class APIClient {
   constructor(readonly config: IntegrationConfig) {}
 
-  public async verifyAuthentication(): Promise<void> {
-    // TODO make the most light-weight request possible to validate
-    // authentication works with the provided credentials, throw an err if
-    // authentication fails
-    const request = new Promise<void>((resolve, reject) => {
-      http.get(
-        {
-          hostname: 'localhost',
-          port: 443,
-          path: '/api/v1/some/endpoint?limit=1',
-          agent: false,
-          timeout: 10,
-        },
-        (res) => {
-          if (res.statusCode !== 200) {
-            reject(new Error('Provider authentication failed'));
-          } else {
-            resolve();
-          }
-        },
-      );
-    });
+  private withBaseUri(path: string): string {
+    return `https://${this.config.databricksSubdomain}.gcp.databricks.com/api/${path}`;
+  }
 
+  private async request<T>(
+    uri: string,
+    method: 'GET' | 'HEAD' = 'GET',
+    retries: number = 1,
+    backoffTime: number = 5,
+  ): Promise<T> {
     try {
-      await request;
+      const response = await fetch(uri, {
+        method,
+        headers: {
+          Authorization: `Bearer ${this.config.databricksAccessToken}`,
+        },
+      });
+
+      if (response.status === 429) {
+        if (retries >= 10) {
+          throw new IntegrationProviderAPIError({
+            endpoint: uri,
+            status: response.status,
+            statusText:
+              'Failed to get response after retrying multiple times (n = 10)',
+          });
+        }
+
+        // Rate limit exceeded
+        // We want to wait for 5s and then retry (but also increasing the waiting for each subsequent try)
+        // Max times: 10
+        const retryAfterMs = backoffTime * retries * 1000;
+        await new Promise((resolve) => setTimeout(resolve, retryAfterMs));
+        return this.request(uri, method, retries + 1);
+      }
+
+      if (response.status === 500) {
+        if (retries > 1) {
+          throw new IntegrationProviderAPIError({
+            endpoint: uri,
+            status: response.status,
+            statusText: 'Failed to get response after retrying',
+          });
+        }
+
+        // We want to wait for ~3s and then retry
+        // Max times: 1
+        const retryAfterMs = 3 * 1000;
+        await new Promise((resolve) => setTimeout(resolve, retryAfterMs));
+        return this.request(uri, method, retries + 1);
+      }
+
+      return response.json();
     } catch (err) {
-      throw new IntegrationProviderAuthenticationError({
-        cause: err,
-        endpoint: 'https://localhost/api/v1/some/endpoint?limit=1',
+      throw new IntegrationProviderAPIError({
+        endpoint: uri,
         status: err.status,
         statusText: err.statusText,
       });
     }
   }
 
+  public async verifyAuthentication(): Promise<void> {
+    const endpoint = this.withBaseUri('2.0/groups/list');
+
+    try {
+      await this.request<GroupsResponse>(endpoint, 'GET');
+    } catch (err) {
+      throw new IntegrationProviderAuthenticationError({
+        endpoint,
+        status: err.code,
+        statusText: err.message,
+      });
+    }
+  }
+
   /**
-   * Iterates each user resource in the provider.
+   * Iterates each group resource in the provider. This endpoint doesn't support pagination.
    *
-   * @param iteratee receives each resource to produce entities/relationships
+   * @param iteratee receives each group to produce entities/relationships
    */
-  public async iterateUsers(
-    iteratee: ResourceIteratee<AcmeUser>,
+  public async iterateGroups(
+    iteratee: ResourceIteratee<string>,
   ): Promise<void> {
-    // TODO paginate an endpoint, invoke the iteratee with each record in the
-    // page
-    //
-    // The provider API will hopefully support pagination. Functions like this
-    // should maintain pagination state, and for each page, for each record in
-    // the page, invoke the `ResourceIteratee`. This will encourage a pattern
-    // where each resource is processed and dropped from memory.
+    const endpoint = this.withBaseUri('2.0/groups/list');
+    const response = await this.request<GroupsResponse>(endpoint, 'GET');
 
-    const users: AcmeUser[] = [
-      {
-        id: 'acme-user-1',
-        name: 'User One',
-      },
-      {
-        id: 'acme-user-2',
-        name: 'User Two',
-      },
-    ];
+    for (const group of response.group_names || []) {
+      await iteratee(group);
+    }
+  }
 
-    for (const user of users) {
+  /**
+   * Iterates each member in the particular group in the provider. This endpoint doesn't support pagination.
+   *
+   * @param iteratee receives each user in a group to produce entities/relationships
+   */
+  public async iterateGroupUsers(
+    groupName: string,
+    iteratee: ResourceIteratee<DatabricksUser>,
+  ): Promise<void> {
+    const endpoint = this.withBaseUri(
+      `2.0/groups/list-members?group_name=${groupName}`,
+    );
+    const response = await this.request<GroupUsersResponse>(endpoint, 'GET');
+
+    for (const user of response.members || []) {
       await iteratee(user);
     }
   }
 
   /**
-   * Iterates each group resource in the provider.
+   * Iterates each cluster in the workspace in the provider. This endpoint doesn't support pagination.
    *
-   * @param iteratee receives each resource to produce entities/relationships
+   * @param iteratee receives each cluster to produce entities/relationships
    */
-  public async iterateGroups(
-    iteratee: ResourceIteratee<AcmeGroup>,
+  public async iterateClusters(
+    iteratee: ResourceIteratee<DatabricksCluster>,
   ): Promise<void> {
-    // TODO paginate an endpoint, invoke the iteratee with each record in the
-    // page
-    //
-    // The provider API will hopefully support pagination. Functions like this
-    // should maintain pagination state, and for each page, for each record in
-    // the page, invoke the `ResourceIteratee`. This will encourage a pattern
-    // where each resource is processed and dropped from memory.
+    const endpoint = this.withBaseUri('2.0/clusters/list');
+    const response = await this.request<ClustersResponse>(endpoint, 'GET');
 
-    const groups: AcmeGroup[] = [
-      {
-        id: 'acme-group-1',
-        name: 'Group One',
-        users: [
-          {
-            id: 'acme-user-1',
-          },
-        ],
-      },
-    ];
-
-    for (const group of groups) {
-      await iteratee(group);
+    for (const cluster of response.clusters || []) {
+      await iteratee(cluster);
     }
   }
 }

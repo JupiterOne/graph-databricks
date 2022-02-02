@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#fetchGroupUsers should collect data 1`] = `
+Object {
+  "collectedEntities": Array [
+    Object {
+      "_class": Array [
+        "Account",
+      ],
+      "_key": "databricks_workspace:3840207185082406.6",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "id": "3840207185082406.6",
+          },
+        },
+      ],
+      "_type": "databricks_workspace",
+      "createdOn": undefined,
+      "displayName": "3840207185082406.6",
+      "id": "3840207185082406.6",
+      "name": "3840207185082406.6",
+    },
+    Object {
+      "_class": Array [
+        "UserGroup",
+      ],
+      "_key": "databricks_group:admins",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "name": "admins",
+          },
+        },
+      ],
+      "_type": "databricks_group",
+      "createdOn": undefined,
+      "displayName": "admins",
+      "name": "admins",
+    },
+    Object {
+      "_class": Array [
+        "UserGroup",
+      ],
+      "_key": "databricks_group:test-group-1",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "name": "test-group-1",
+          },
+        },
+      ],
+      "_type": "databricks_group",
+      "createdOn": undefined,
+      "displayName": "test-group-1",
+      "name": "test-group-1",
+    },
+    Object {
+      "_class": Array [
+        "UserGroup",
+      ],
+      "_key": "databricks_group:test-group-2",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "name": "test-group-2",
+          },
+        },
+      ],
+      "_type": "databricks_group",
+      "createdOn": undefined,
+      "displayName": "test-group-2",
+      "name": "test-group-2",
+    },
+    Object {
+      "_class": Array [
+        "User",
+      ],
+      "_key": "databricks_user:viragsf@gmail.com",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "username": "viragsf@gmail.com",
+          },
+        },
+      ],
+      "_type": "databricks_user",
+      "createdOn": undefined,
+      "displayName": "viragsf@gmail.com",
+      "name": "viragsf@gmail.com",
+      "username": "viragsf@gmail.com",
+    },
+    Object {
+      "_class": Array [
+        "User",
+      ],
+      "_key": "databricks_user:austin.kelleher@jupiterone.dev",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "username": "austin.kelleher@jupiterone.dev",
+          },
+        },
+      ],
+      "_type": "databricks_user",
+      "createdOn": undefined,
+      "displayName": "austin.kelleher@jupiterone.dev",
+      "name": "austin.kelleher@jupiterone.dev",
+      "username": "austin.kelleher@jupiterone.dev",
+    },
+  ],
+  "encounteredTypes": Array [
+    "databricks_workspace",
+    "databricks_group",
+    "databricks_workspace_has_group",
+    "databricks_user",
+    "databricks_group_has_user",
+  ],
+  "numCollectedEntities": 6,
+}
+`;
+
+exports[`#fetchGroups should collect data 1`] = `
+Object {
+  "collectedEntities": Array [
+    Object {
+      "_class": Array [
+        "Account",
+      ],
+      "_key": "databricks_workspace:3840207185082406.6",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "id": "3840207185082406.6",
+          },
+        },
+      ],
+      "_type": "databricks_workspace",
+      "createdOn": undefined,
+      "displayName": "3840207185082406.6",
+      "id": "3840207185082406.6",
+      "name": "3840207185082406.6",
+    },
+    Object {
+      "_class": Array [
+        "UserGroup",
+      ],
+      "_key": "databricks_group:admins",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "name": "admins",
+          },
+        },
+      ],
+      "_type": "databricks_group",
+      "createdOn": undefined,
+      "displayName": "admins",
+      "name": "admins",
+    },
+    Object {
+      "_class": Array [
+        "UserGroup",
+      ],
+      "_key": "databricks_group:test-group-1",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "name": "test-group-1",
+          },
+        },
+      ],
+      "_type": "databricks_group",
+      "createdOn": undefined,
+      "displayName": "test-group-1",
+      "name": "test-group-1",
+    },
+    Object {
+      "_class": Array [
+        "UserGroup",
+      ],
+      "_key": "databricks_group:test-group-2",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "name": "test-group-2",
+          },
+        },
+      ],
+      "_type": "databricks_group",
+      "createdOn": undefined,
+      "displayName": "test-group-2",
+      "name": "test-group-2",
+    },
+  ],
+  "encounteredTypes": Array [
+    "databricks_workspace",
+    "databricks_group",
+    "databricks_workspace_has_group",
+  ],
+  "numCollectedEntities": 4,
+}
+`;

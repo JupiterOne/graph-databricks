@@ -1,6 +1,7 @@
-import { accountSteps } from './account';
-import { accessSteps } from './access';
+import { workspaceSteps } from './workspace';
+import { groupSteps } from './groups';
+import { clusterSteps } from './clusters';
 
-const integrationSteps = [...accountSteps, ...accessSteps];
+const integrationSteps = [...workspaceSteps, ...groupSteps, ...clusterSteps];
 
 export { integrationSteps };
