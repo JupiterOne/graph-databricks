@@ -14,6 +14,7 @@ export function createClusterEntity(cluster: DatabricksCluster): Entity {
         _type: Entities.CLUSTER._type,
         _class: Entities.CLUSTER._class,
         _key: `databricks_cluster:${cluster.cluster_id}`,
+        id: cluster.cluster_id,
         name: cluster.cluster_name,
         creator: cluster.creator_user_name,
         state: cluster.state,

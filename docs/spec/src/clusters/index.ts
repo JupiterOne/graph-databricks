@@ -46,4 +46,23 @@ export const clusterSpec: StepSpec<IntegrationConfig>[] = [
     dependsOn: ['fetch-group-users', 'fetch-clusters'],
     implemented: true,
   },
+  {
+    /**
+     * ENDPOINT: n/a
+     * PATTERN: Build Child Relationships
+     */
+    id: 'build-cluster-is-aws-instance-relationships',
+    name: 'Build Cluster Is AWS Instance Relationships',
+    entities: [],
+    relationships: [
+      {
+        _type: 'databricks_cluster_is_aws_instance',
+        sourceType: 'databricks_cluster',
+        _class: RelationshipClass.IS,
+        targetType: 'aws_instance',
+      },
+    ],
+    dependsOn: ['fetch-clusters'],
+    implemented: true,
+  },
 ];

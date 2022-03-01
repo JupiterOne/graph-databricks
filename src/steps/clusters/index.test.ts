@@ -2,13 +2,18 @@ import {
   createMockStepExecutionContext,
   Recording,
 } from '@jupiterone/integration-sdk-testing';
-import { buildClusterUserRelationships, fetchClusters } from '.';
+import {
+  buildClusterIsAwsInstanceRelationships,
+  buildClusterUserRelationships,
+  fetchClusters,
+} from '.';
 import { fetchGroups, fetchGroupUsers } from '../groups';
 import { integrationConfig } from '../../../test/config';
 import { setupDatabricksRecording } from '../../../test/recording';
 import { IntegrationConfig } from '../../config';
 import { Relationships } from '../constants';
 import { fetchWorkspaceDetails } from '../workspace';
+import { separateDirectMappedRelationships } from '../../../test/helpers/separateDirectMappedRelationships';
 
 describe('#fetchClusters', () => {
   let recording: Recording;
@@ -142,5 +147,68 @@ describe('#buildClusterUserRelationships', () => {
         },
       },
     });
+  });
+});
+
+describe('#buildClusterIsAWSInstanceRelationships', () => {
+  let recording: Recording;
+
+  beforeEach(() => {
+    recording = setupDatabricksRecording({
+      directory: __dirname,
+      name: 'buildClusterIsAWSInstanceRelationships',
+    });
+  });
+
+  afterEach(async () => {
+    await recording.stop();
+  });
+
+  test('should collect data', async () => {
+    const context = createMockStepExecutionContext<IntegrationConfig>({
+      instanceConfig: integrationConfig,
+    });
+
+    await fetchWorkspaceDetails(context);
+    await fetchClusters(context);
+    await buildClusterIsAwsInstanceRelationships(context);
+
+    expect({
+      numCollectedEntities: context.jobState.collectedEntities.length,
+      collectedEntities: context.jobState.collectedEntities,
+      encounteredTypes: context.jobState.encounteredTypes,
+    }).toMatchSnapshot();
+
+    const { directRelationships, mappedRelationships } =
+      separateDirectMappedRelationships(
+        context.jobState.collectedRelationships,
+      );
+
+    expect(directRelationships.length).toBeGreaterThan(0);
+    expect(directRelationships).toMatchDirectRelationshipSchema({
+      schema: {
+        properties: {
+          _class: { const: 'HAS' },
+          _type: {
+            const: 'databricks_workspace_has_cluster',
+          },
+        },
+      },
+    });
+
+    expect(mappedRelationships.length).toBeGreaterThan(0);
+    expect(
+      mappedRelationships
+        .filter(
+          (e) =>
+            e._mapping.sourceEntityKey ===
+            'databricks_cluster:0222-151525-vwdam92b',
+        )
+        .every(
+          (mappedRelationship) =>
+            mappedRelationship._key ===
+            'databricks_cluster:0222-151525-vwdam92b|is|FORWARD:tag.ClusterId=0222-151525-vwdam92b:_type=aws_instance:_class=Host',
+        ),
+    ).toBe(true);
   });
 });

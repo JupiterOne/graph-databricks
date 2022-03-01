@@ -12,10 +12,12 @@ export const Steps = {
   GROUP_USER_RELATIONSHIPS: 'build-user-group-relationships',
   CLUSTERS: 'fetch-clusters',
   CLUSTER_USER_RELATIONSHIPS: 'build-cluster-user-relationships',
+  CLUSTER_AWS_INSTANCE_RELATIONSHIPS:
+    'build-cluster-is-aws-instance-relationships',
 };
 
 export const Entities: Record<
-  'WORKSPACE' | 'GROUP' | 'USER' | 'CLUSTER',
+  'WORKSPACE' | 'GROUP' | 'USER' | 'CLUSTER' | 'AWS_INSTANCE',
   StepEntityMetadata
 > = {
   WORKSPACE: {
@@ -38,13 +40,19 @@ export const Entities: Record<
     _type: 'databricks_cluster',
     _class: ['Cluster'],
   },
+  AWS_INSTANCE: {
+    resourceName: 'AWS Instance',
+    _type: 'aws_instance',
+    _class: ['Host'],
+  },
 };
 
 export const Relationships: Record<
   | 'WORKSPACE_HAS_GROUP'
   | 'WORKSPACE_HAS_CLUSTER'
   | 'GROUP_HAS_USER'
-  | 'USER_CREATED_CLUSTER',
+  | 'USER_CREATED_CLUSTER'
+  | 'CLUSTER_IS_AWS_INSTANCE',
   StepRelationshipMetadata
 > = {
   WORKSPACE_HAS_GROUP: {
@@ -70,5 +78,11 @@ export const Relationships: Record<
     sourceType: Entities.USER._type,
     _class: RelationshipClass.CREATED,
     targetType: Entities.CLUSTER._type,
+  },
+  CLUSTER_IS_AWS_INSTANCE: {
+    _type: 'databricks_cluster_is_aws_instance',
+    sourceType: Entities.CLUSTER._type,
+    _class: RelationshipClass.IS,
+    targetType: Entities.AWS_INSTANCE._type,
   },
 };

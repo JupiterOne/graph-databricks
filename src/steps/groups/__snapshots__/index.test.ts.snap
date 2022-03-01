@@ -7,20 +7,20 @@ Object {
       "_class": Array [
         "Account",
       ],
-      "_key": "databricks_workspace:3840207185082406.6",
+      "_key": "databricks_workspace:dbc-c50dbe80-ed72.cloud.databricks.com",
       "_rawData": Array [
         Object {
           "name": "default",
           "rawData": Object {
-            "id": "3840207185082406.6",
+            "id": "dbc-c50dbe80-ed72.cloud.databricks.com",
           },
         },
       ],
       "_type": "databricks_workspace",
       "createdOn": undefined,
-      "displayName": "3840207185082406.6",
-      "id": "3840207185082406.6",
-      "name": "3840207185082406.6",
+      "displayName": "dbc-c50dbe80-ed72.cloud.databricks.com",
+      "id": "dbc-c50dbe80-ed72.cloud.databricks.com",
+      "name": "dbc-c50dbe80-ed72.cloud.databricks.com",
     },
     Object {
       "_class": Array [
@@ -42,77 +42,60 @@ Object {
     },
     Object {
       "_class": Array [
-        "UserGroup",
-      ],
-      "_key": "databricks_group:test-group-1",
-      "_rawData": Array [
-        Object {
-          "name": "default",
-          "rawData": Object {
-            "name": "test-group-1",
-          },
-        },
-      ],
-      "_type": "databricks_group",
-      "createdOn": undefined,
-      "displayName": "test-group-1",
-      "name": "test-group-1",
-    },
-    Object {
-      "_class": Array [
-        "UserGroup",
-      ],
-      "_key": "databricks_group:test-group-2",
-      "_rawData": Array [
-        Object {
-          "name": "default",
-          "rawData": Object {
-            "name": "test-group-2",
-          },
-        },
-      ],
-      "_type": "databricks_group",
-      "createdOn": undefined,
-      "displayName": "test-group-2",
-      "name": "test-group-2",
-    },
-    Object {
-      "_class": Array [
         "User",
       ],
-      "_key": "databricks_user:viragsf@gmail.com",
+      "_key": "databricks_user:stefan.virag@contractor.jupiterone.com",
       "_rawData": Array [
         Object {
           "name": "default",
           "rawData": Object {
-            "username": "viragsf@gmail.com",
+            "username": "stefan.virag@contractor.jupiterone.com",
           },
         },
       ],
       "_type": "databricks_user",
       "createdOn": undefined,
-      "displayName": "viragsf@gmail.com",
-      "name": "viragsf@gmail.com",
-      "username": "viragsf@gmail.com",
+      "displayName": "stefan.virag@contractor.jupiterone.com",
+      "name": "stefan.virag@contractor.jupiterone.com",
+      "username": "stefan.virag@contractor.jupiterone.com",
     },
     Object {
       "_class": Array [
         "User",
       ],
-      "_key": "databricks_user:austin.kelleher@jupiterone.dev",
+      "_key": "databricks_user:austin.kelleher@jupiterone.com",
       "_rawData": Array [
         Object {
           "name": "default",
           "rawData": Object {
-            "username": "austin.kelleher@jupiterone.dev",
+            "username": "austin.kelleher@jupiterone.com",
           },
         },
       ],
       "_type": "databricks_user",
       "createdOn": undefined,
-      "displayName": "austin.kelleher@jupiterone.dev",
-      "name": "austin.kelleher@jupiterone.dev",
-      "username": "austin.kelleher@jupiterone.dev",
+      "displayName": "austin.kelleher@jupiterone.com",
+      "name": "austin.kelleher@jupiterone.com",
+      "username": "austin.kelleher@jupiterone.com",
+    },
+    Object {
+      "_class": Array [
+        "User",
+      ],
+      "_key": "databricks_user:sam.andrus@jupiterone.com",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "username": "sam.andrus@jupiterone.com",
+          },
+        },
+      ],
+      "_type": "databricks_user",
+      "createdOn": undefined,
+      "displayName": "sam.andrus@jupiterone.com",
+      "name": "sam.andrus@jupiterone.com",
+      "username": "sam.andrus@jupiterone.com",
     },
   ],
   "encounteredTypes": Array [
@@ -122,7 +105,7 @@ Object {
     "databricks_user",
     "databricks_group_has_user",
   ],
-  "numCollectedEntities": 6,
+  "numCollectedEntities": 5,
 }
 `;
 
@@ -133,20 +116,20 @@ Object {
       "_class": Array [
         "Account",
       ],
-      "_key": "databricks_workspace:3840207185082406.6",
+      "_key": "databricks_workspace:dbc-c50dbe80-ed72.cloud.databricks.com",
       "_rawData": Array [
         Object {
           "name": "default",
           "rawData": Object {
-            "id": "3840207185082406.6",
+            "id": "dbc-c50dbe80-ed72.cloud.databricks.com",
           },
         },
       ],
       "_type": "databricks_workspace",
       "createdOn": undefined,
-      "displayName": "3840207185082406.6",
-      "id": "3840207185082406.6",
-      "name": "3840207185082406.6",
+      "displayName": "dbc-c50dbe80-ed72.cloud.databricks.com",
+      "id": "dbc-c50dbe80-ed72.cloud.databricks.com",
+      "name": "dbc-c50dbe80-ed72.cloud.databricks.com",
     },
     Object {
       "_class": Array [
@@ -166,48 +149,12 @@ Object {
       "displayName": "admins",
       "name": "admins",
     },
-    Object {
-      "_class": Array [
-        "UserGroup",
-      ],
-      "_key": "databricks_group:test-group-1",
-      "_rawData": Array [
-        Object {
-          "name": "default",
-          "rawData": Object {
-            "name": "test-group-1",
-          },
-        },
-      ],
-      "_type": "databricks_group",
-      "createdOn": undefined,
-      "displayName": "test-group-1",
-      "name": "test-group-1",
-    },
-    Object {
-      "_class": Array [
-        "UserGroup",
-      ],
-      "_key": "databricks_group:test-group-2",
-      "_rawData": Array [
-        Object {
-          "name": "default",
-          "rawData": Object {
-            "name": "test-group-2",
-          },
-        },
-      ],
-      "_type": "databricks_group",
-      "createdOn": undefined,
-      "displayName": "test-group-2",
-      "name": "test-group-2",
-    },
   ],
   "encounteredTypes": Array [
     "databricks_workspace",
     "databricks_group",
     "databricks_workspace_has_group",
   ],
-  "numCollectedEntities": 4,
+  "numCollectedEntities": 2,
 }
 `;

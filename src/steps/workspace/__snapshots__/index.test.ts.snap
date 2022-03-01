@@ -7,20 +7,20 @@ Object {
       "_class": Array [
         "Account",
       ],
-      "_key": "databricks_workspace:3840207185082406.6",
+      "_key": "databricks_workspace:dbc-c50dbe80-ed72.cloud.databricks.com",
       "_rawData": Array [
         Object {
           "name": "default",
           "rawData": Object {
-            "id": "3840207185082406.6",
+            "id": "dbc-c50dbe80-ed72.cloud.databricks.com",
           },
         },
       ],
       "_type": "databricks_workspace",
       "createdOn": undefined,
-      "displayName": "3840207185082406.6",
-      "id": "3840207185082406.6",
-      "name": "3840207185082406.6",
+      "displayName": "dbc-c50dbe80-ed72.cloud.databricks.com",
+      "id": "dbc-c50dbe80-ed72.cloud.databricks.com",
+      "name": "dbc-c50dbe80-ed72.cloud.databricks.com",
     },
   ],
   "encounteredTypes": Array [

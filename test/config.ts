@@ -7,12 +7,12 @@ if (process.env.LOAD_ENV) {
     path: path.join(__dirname, '../.env'),
   });
 }
-const DEFAULT_DATABRICKS_SUBDOMAIN = '3840207185082406.6';
+const DEFAULT_DATABRICKS_HOST =
+  'https://dbc-c50dbe80-ed72.cloud.databricks.com';
 const DEFAULT_DATABRICKS_ACCESS_TOKEN = 'dummy-databricks-access-token';
 
 export const integrationConfig: IntegrationConfig = {
-  databricksSubdomain:
-    process.env.DATABRICKS_SUBDOMAIN || DEFAULT_DATABRICKS_SUBDOMAIN,
+  databricksHost: process.env.DATABRICKS_HOST || DEFAULT_DATABRICKS_HOST,
   databricksAccessToken:
     process.env.DATABRICKS_ACCESS_TOKEN || DEFAULT_DATABRICKS_ACCESS_TOKEN,
 };

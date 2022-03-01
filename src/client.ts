@@ -20,7 +20,11 @@ export class APIClient {
   constructor(readonly config: IntegrationConfig) {}
 
   private withBaseUri(path: string): string {
-    return `https://${this.config.databricksSubdomain}.gcp.databricks.com/api/${path}`;
+    if (this.config.databricksHost.includes('https://')) {
+      return `${this.config.databricksHost}/api/${path}`;
+    } else {
+      return `https://${this.config.databricksHost}/api/${path}`;
+    }
   }
 
   private async request<T>(

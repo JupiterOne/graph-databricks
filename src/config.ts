@@ -7,7 +7,7 @@ import {
 import { createAPIClient } from './client';
 
 export const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
-  databricksSubdomain: {
+  databricksHost: {
     type: 'string',
   },
   databricksAccessToken: {
@@ -17,7 +17,7 @@ export const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
 };
 
 export interface IntegrationConfig extends IntegrationInstanceConfig {
-  databricksSubdomain: string;
+  databricksHost: string;
   databricksAccessToken: string;
 }
 
@@ -26,9 +26,9 @@ export async function validateInvocation(
 ) {
   const { config } = context.instance;
 
-  if (!config.databricksSubdomain || !config.databricksAccessToken) {
+  if (!config.databricksHost || !config.databricksAccessToken) {
     throw new IntegrationValidationError(
-      'Config requires all of {databricksSubdomain, databricksAccessToken}',
+      'Config requires all of {databricksHost, databricksAccessToken}',
     );
   }
 
