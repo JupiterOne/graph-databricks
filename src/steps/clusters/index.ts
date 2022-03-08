@@ -2,15 +2,22 @@ import {
   createDirectRelationship,
   createMappedRelationship,
   Entity,
+  getRawData,
   IntegrationStep,
   IntegrationStepExecutionContext,
   RelationshipClass,
-  RelationshipDirection,
 } from '@jupiterone/integration-sdk-core';
 import { createAPIClient } from '../../client';
 
 import { IntegrationConfig } from '../../config';
-import { Steps, Entities, Relationships } from '../constants';
+import { DatabricksCluster } from '../../types';
+import {
+  Steps,
+  Entities,
+  Relationships,
+  MappedRelationships,
+  TargetEntities,
+} from '../constants';
 import { getUserKey } from '../groups/converters';
 import { WORKSPACE_ENTITY_KEY } from '../workspace';
 import { createClusterEntity } from './converters';
@@ -67,31 +74,36 @@ export async function buildClusterIsAwsInstanceRelationships({
   jobState,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
   // "cloud" is found in the host when Databricks for AWS is used
-  if (!instance.config.databricksHost.includes('cloud')) {
+  if (!instance.config.databricksHost.includes('.cloud.databricks.com')) {
     return;
   }
 
   await jobState.iterateEntities(
     { _type: Entities.CLUSTER._type },
     async (clusterEntity) => {
-      await jobState.addRelationship(
-        createMappedRelationship({
-          source: clusterEntity,
-          _class: RelationshipClass.IS,
-          _type: Relationships.CLUSTER_IS_AWS_INSTANCE._type,
-          _mapping: {
-            sourceEntityKey: clusterEntity._key,
-            relationshipDirection: RelationshipDirection.FORWARD,
-            targetFilterKeys: [['tag.ClusterId', '_type', '_class']],
-            targetEntity: {
-              _class: Entities.AWS_INSTANCE._class,
-              _type: Entities.AWS_INSTANCE._type,
-              'tag.ClusterId': clusterEntity.id,
+      const cluster = getRawData<DatabricksCluster>(clusterEntity);
+
+      if (clusterEntity && cluster) {
+        await jobState.addRelationship(
+          createMappedRelationship({
+            source: clusterEntity,
+            _class: RelationshipClass.IS,
+            _type: MappedRelationships.CLUSTER_IS_AWS_INSTANCE._type,
+            _mapping: {
+              sourceEntityKey: clusterEntity._key,
+              relationshipDirection:
+                MappedRelationships.CLUSTER_IS_AWS_INSTANCE.direction,
+              targetFilterKeys: [['tag.ClusterId', '_type', '_class']],
+              targetEntity: {
+                _class: TargetEntities.AWS_INSTANCE._class,
+                _type: TargetEntities.AWS_INSTANCE._type,
+                'tag.ClusterId': cluster.cluster_id,
+              },
+              skipTargetCreation: true,
             },
-            skipTargetCreation: true,
-          },
-        }),
-      );
+          }),
+        );
+      }
     },
   );
 }
@@ -117,7 +129,8 @@ export const clusterSteps: IntegrationStep<IntegrationConfig>[] = [
     id: Steps.CLUSTER_AWS_INSTANCE_RELATIONSHIPS,
     name: 'Build Cluster Is AWS Instance Relationships',
     entities: [],
-    relationships: [Relationships.CLUSTER_IS_AWS_INSTANCE],
+    relationships: [],
+    mappedRelationships: [MappedRelationships.CLUSTER_IS_AWS_INSTANCE],
     dependsOn: [Steps.CLUSTERS],
     executionHandler: buildClusterIsAwsInstanceRelationships,
   },

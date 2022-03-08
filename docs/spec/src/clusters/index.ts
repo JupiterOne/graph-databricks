@@ -1,4 +1,8 @@
-import { RelationshipClass, StepSpec } from '@jupiterone/integration-sdk-core';
+import {
+  RelationshipClass,
+  RelationshipDirection,
+  StepSpec,
+} from '@jupiterone/integration-sdk-core';
 import { IntegrationConfig } from '../../../../src/config';
 
 export const clusterSpec: StepSpec<IntegrationConfig>[] = [
@@ -54,12 +58,14 @@ export const clusterSpec: StepSpec<IntegrationConfig>[] = [
     id: 'build-cluster-is-aws-instance-relationships',
     name: 'Build Cluster Is AWS Instance Relationships',
     entities: [],
-    relationships: [
+    relationships: [],
+    mappedRelationships: [
       {
         _type: 'databricks_cluster_is_aws_instance',
         sourceType: 'databricks_cluster',
         _class: RelationshipClass.IS,
         targetType: 'aws_instance',
+        direction: RelationshipDirection.FORWARD,
       },
     ],
     dependsOn: ['fetch-clusters'],

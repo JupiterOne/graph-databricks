@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Added
+
+- Added support for ingesting the following **new** mapped relationships:
+
+  | Source               | class  | Target         |
+  | -------------------- | ------ | -------------- |
+  | `databricks_cluster` | **IS** | `aws_instance` |
+
 ## 1.0.0 - 2022-02-09
 
 Initial Databricks integration

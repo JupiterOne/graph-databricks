@@ -36,6 +36,7 @@ Object {
     },
   ],
   "_type": "databricks_user",
+  "active": true,
   "createdOn": undefined,
   "displayName": "mock-user@gmail.com",
   "name": "mock-user@gmail.com",

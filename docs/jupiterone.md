@@ -102,11 +102,18 @@ The following relationships are created:
 
 | Source Entity `_type`  | Relationship `_class` | Target Entity `_type` |
 | ---------------------- | --------------------- | --------------------- |
-| `databricks_cluster`   | **IS**                | `aws_instance`        |
 | `databricks_group`     | **HAS**               | `databricks_user`     |
 | `databricks_user`      | **CREATED**           | `databricks_cluster`  |
 | `databricks_workspace` | **HAS**               | `databricks_cluster`  |
 | `databricks_workspace` | **HAS**               | `databricks_group`    |
+
+### Mapped Relationships
+
+The following mapped relationships are created:
+
+| Source Entity `_type` | Relationship `_class` | Target Entity `_type` | Direction |
+| --------------------- | --------------------- | --------------------- | --------- |
+| `databricks_cluster`  | **IS**                | `*aws_instance*`      | FORWARD   |
 
 <!--
 ********************************************************************************
