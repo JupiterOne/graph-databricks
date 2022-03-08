@@ -18,8 +18,7 @@ for interacting with the Databricks resources.
    format: https://[numbers].[number].gcp.databricks.com
 
 4. Take note of it and supply it to the .env file. (Example,
-   https://1122334455.6.gcp.databricks.com would result in this ENV variable:
-   DATABRICKS_SUBDOMAIN=1122334455.6)
+   DATABRICKS_HOST=https://1122334455.6.gcp.databricks.com)
 
 5. Next, click on that link to go to the workspace dashboard. Once there, click
    on the settings icon (bottom part of left side menu) and choose "User
@@ -35,5 +34,5 @@ Copy the `.env.example` to `.env` file and fill in the variables using the user
 information and API token information generated from instructions above. The
 mapping is as follows:
 
-- DATABRICKS_SUBDOMAIN= ${`subdomain`}
+- DATABRICKS_HOST= ${`host`}
 - DATABRICKS_ACCESS_TOKEN= ${`accessToken`}

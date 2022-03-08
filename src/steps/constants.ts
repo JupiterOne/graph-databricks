@@ -1,6 +1,8 @@
 import {
   RelationshipClass,
+  RelationshipDirection,
   StepEntityMetadata,
+  StepMappedRelationshipMetadata,
   StepRelationshipMetadata,
 } from '@jupiterone/integration-sdk-core';
 
@@ -12,6 +14,8 @@ export const Steps = {
   GROUP_USER_RELATIONSHIPS: 'build-user-group-relationships',
   CLUSTERS: 'fetch-clusters',
   CLUSTER_USER_RELATIONSHIPS: 'build-cluster-user-relationships',
+  CLUSTER_AWS_INSTANCE_RELATIONSHIPS:
+    'build-cluster-is-aws-instance-relationships',
 };
 
 export const Entities: Record<
@@ -70,5 +74,26 @@ export const Relationships: Record<
     sourceType: Entities.USER._type,
     _class: RelationshipClass.CREATED,
     targetType: Entities.CLUSTER._type,
+  },
+};
+
+export const TargetEntities: Record<'AWS_INSTANCE', StepEntityMetadata> = {
+  AWS_INSTANCE: {
+    resourceName: 'AWS Instance',
+    _type: 'aws_instance',
+    _class: ['Host'],
+  },
+};
+
+export const MappedRelationships: Record<
+  'CLUSTER_IS_AWS_INSTANCE',
+  StepMappedRelationshipMetadata
+> = {
+  CLUSTER_IS_AWS_INSTANCE: {
+    _type: 'databricks_cluster_is_aws_instance',
+    sourceType: Entities.CLUSTER._type,
+    _class: RelationshipClass.IS,
+    targetType: TargetEntities.AWS_INSTANCE._type,
+    direction: RelationshipDirection.FORWARD,
   },
 };

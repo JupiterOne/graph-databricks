@@ -38,8 +38,7 @@ If you need help with this integration, please contact
 3. You will be able to see the URL on the following page that has the following
    format: https://[numbers].[number].gcp.databricks.com
 4. Take note of it and supply it to the .env file. (Example,
-   https://1122334455.6.gcp.databricks.com would result in this ENV variable:
-   DATABRICKS_SUBDOMAIN=1122334455.6)
+   DATABRICKS_HOST=https://1122334455.6.gcp.databricks.com)
 5. Next, click on that link to go to the workspace dashboard. Once there, click
    on the settings icon (bottom part of left side menu) and choose "User
    settings".
@@ -60,7 +59,7 @@ If you need help with this integration, please contact
   the integration instance.
 - Select a **Polling Interval** that you feel is sufficient for your monitoring
   needs. You may leave this as `DISABLED` and manually execute the integration.
-- Enter the Databricks **Subdomain** and **Access Token** generated for use by
+- Enter the Databricks **Host** and **Access Token** generated for use by
   JupiterOne.
 
 4. Click **Create Configuration** once all values are provided.
@@ -107,6 +106,14 @@ The following relationships are created:
 | `databricks_user`      | **CREATED**           | `databricks_cluster`  |
 | `databricks_workspace` | **HAS**               | `databricks_cluster`  |
 | `databricks_workspace` | **HAS**               | `databricks_group`    |
+
+### Mapped Relationships
+
+The following mapped relationships are created:
+
+| Source Entity `_type` | Relationship `_class` | Target Entity `_type` | Direction |
+| --------------------- | --------------------- | --------------------- | --------- |
+| `databricks_cluster`  | **IS**                | `*aws_instance*`      | FORWARD   |
 
 <!--
 ********************************************************************************

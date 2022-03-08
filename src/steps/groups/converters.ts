@@ -38,6 +38,7 @@ export function createUserEntity(user: DatabricksUser): Entity {
         _key: getUserKey(user.user_name),
         name: user.user_name,
         username: user.user_name,
+        active: true,
       },
     },
   });

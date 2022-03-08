@@ -13,9 +13,9 @@ export async function fetchWorkspaceDetails({
   instance,
   jobState,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
-  const workspaceSubdomain = instance.config.databricksSubdomain;
+  const workspaceHost = instance.config.databricksHost;
   const workspaceEntity = await jobState.addEntity(
-    createWorkspaceEntity(workspaceSubdomain),
+    createWorkspaceEntity(workspaceHost),
   );
 
   await jobState.setData(WORKSPACE_ENTITY_KEY, workspaceEntity);

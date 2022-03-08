@@ -65,6 +65,7 @@ Object {
   "displayName": "test-gcp-cluster",
   "enableElasticDisk": false,
   "enableLocalDiskEncryption": false,
+  "id": "0117-142331-yanks462",
   "initScriptsSafeMode": false,
   "name": "test-gcp-cluster",
   "nodeTypeId": "n1-standard-4",

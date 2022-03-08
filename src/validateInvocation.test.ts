@@ -30,7 +30,7 @@ it('auth error', async () => {
 
   const executionContext = createMockExecutionContext({
     instanceConfig: {
-      databricksSubdomain: 'INVALID',
+      databricksHost: 'INVALID',
       databricksAccessToken: 'INVALID',
     },
   });
