@@ -4,4 +4,4 @@ dist/
 .env
 .eslintcache
 tsconfig.tsbuildinfo
-.nmprc
+.npmrc
