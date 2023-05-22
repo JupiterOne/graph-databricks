@@ -27,8 +27,8 @@ jobs:
       - name: Run build
         run: yarn build
 
-  # Publishing is done in a separate job to allow
-  # for all matrix builds to complete.
+  # Publishing is done in a separate job using
+  # the npm_build_release action.
   BuildRelease:
     needs: test
     runs-on: ubuntu-latest
