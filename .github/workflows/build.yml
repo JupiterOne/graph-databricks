@@ -17,6 +17,8 @@ jobs:
 
       - name: Check out code repository source code
         uses: actions/checkout@v2
+        with:
+          ref: main
 
       - name: Install dependencies
         run: yarn
@@ -28,8 +30,7 @@ jobs:
         id: test
         shell: bash
         run: |
-          GH_TOKEN=${{ secrets.AUTO_GITHUB_PAT_TOKEN }} echo "a="$(yarn auto shipit --dry-run --quiet)"" >> $GITHUB_OUTPUT
-      - run: echo ${{ steps.test.outputs.a }}
+          GH_TOKEN=${{ secrets.AUTO_GITHUB_PAT_TOKEN }} yarn auto shipit --dry-run --quiet
 
   # Publishing is done in a separate job using
   # the npm_build_release action.
