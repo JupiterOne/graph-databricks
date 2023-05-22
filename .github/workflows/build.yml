@@ -28,7 +28,9 @@ jobs:
         run: yarn build
 
       - name: test publish
-        run: GH_TOKEN=${{ secrets.AUTO_GITHUB_PAT_TOKEN }} yarn auto shipit --dry-run --quiet
+        shell: bash
+        run: |
+          GH_TOKEN=${{ secrets.AUTO_GITHUB_PAT_TOKEN }} yarn auto shipit --dry-run --quiet
 
   # Publishing is done in a separate job using
   # the npm_build_release action.
