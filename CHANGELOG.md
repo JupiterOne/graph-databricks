@@ -1,3 +1,15 @@
+# v1.4.0 (Tue May 23 2023)
+
+#### 🚀 Enhancement
+
+- INT-8228: adding postversion hook [#22](https://github.com/JupiterOne/graph-databricks/pull/22) ([@sl45082](https://github.com/sl45082))
+
+#### Authors: 1
+
+- bob bisantz ([@sl45082](https://github.com/sl45082))
+
+---
+
 # v1.3.0 (Mon May 22 2023)
 
 #### 🚀 Enhancement
