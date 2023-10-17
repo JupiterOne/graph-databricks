@@ -2,6 +2,10 @@
   "name": "@jupiterone/graph-databricks",
   "version": "1.4.0",
   "description": "A JupiterOne Integration for ingesting data for the Databricks",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JupiterOne/graph-databricks"
+  },
   "license": "MPL-2.0",
   "main": "src/index.js",
   "types": "src/index.d.ts",
